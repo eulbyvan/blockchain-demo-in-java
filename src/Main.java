@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -15,11 +16,30 @@ public class Main {
 
             Hash
      */
+    ArrayList<Block> blockchain = new ArrayList<>();
     public static void main(String[] args) {
-        String[] list1 = {"a", "b", "c"};
-        String[] list2 = {"a", "b", "c"};
+        // transactions could be a separate class
+        // note that if you change anything inside a block, it will change all the following blocks's hash code as well
 
-        System.out.println(Arrays.hashCode(list1));
-        System.out.println(Arrays.hashCode(list2));
+        // genesis block
+        String[] genesisTransactions = {"stu sent pid 1 bitcoin", "pid sent 0.5 bitcoin to stu"};
+        Block genesisBlock = new Block(0, genesisTransactions);
+
+        // second block
+        String[] block2Transactions = {"stu sent pid 0.5 bitcoin", "pid sent 0.1 bitcoin to stu"};
+        Block block2 = new Block(genesisBlock.getBlockHash(), block2Transactions);
+
+        // third block
+        String[] block3Transactions = {"stu sent pid 0.1 bitcoin", "pid sent 0.05 bitcoin to stu"};
+        Block block3 = new Block(genesisBlock.getBlockHash(), block3Transactions);
+
+        System.out.print("Hash code of the genesis block: ");
+        System.out.println(genesisBlock.getBlockHash());
+
+        System.out.print("Hash code of block 2: ");
+        System.out.println(block2.getBlockHash());
+
+        System.out.print("Hash code of block 3: ");
+        System.out.println(block3.getBlockHash());
     }
 }
