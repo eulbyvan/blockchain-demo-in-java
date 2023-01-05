@@ -16,10 +16,11 @@ public class Main {
 
             Hash
      */
+
     ArrayList<Block> blockchain = new ArrayList<>();
     public static void main(String[] args) {
         // transactions could be a separate class
-        // note that if you change anything inside a block, it will change all the following blocks's hash code as well
+        // note that if you change anything inside a block, it will change the hash of all the following blocks
 
         // genesis block
         String[] genesisTransactions = {"stu sent pid 1 bitcoin", "pid sent 0.5 bitcoin to stu"};
@@ -31,7 +32,7 @@ public class Main {
 
         // third block
         String[] block3Transactions = {"stu sent pid 0.1 bitcoin", "pid sent 0.05 bitcoin to stu"};
-        Block block3 = new Block(genesisBlock.getBlockHash(), block3Transactions);
+        Block block3 = new Block(block2.getBlockHash(), block3Transactions);
 
         System.out.print("Hash code of the genesis block: ");
         System.out.println(genesisBlock.getBlockHash());
